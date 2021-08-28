@@ -1,0 +1,6 @@
+/target
+/jljoin
+*.ndjson
+*.jsonl
+*.gz
+*.gz.sha1sum
