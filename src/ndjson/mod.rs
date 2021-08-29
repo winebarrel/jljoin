@@ -108,7 +108,13 @@ where
             let ctx = format!("Failed to parse JSON: {}", &line);
             Err(anyhow::Error::new(e).context(ctx))
         }
-        Ok(v) => Ok(Some(v)),
+        Ok(v) => {
+            if !v.is_object() {
+                Err(anyhow!("JSON in row is not Object type: {}", v))
+            } else {
+                Ok(Some(v))
+            }
+        }
     }
 }
 
@@ -159,9 +165,5 @@ fn json_get_or_err(json: &Value, key: &str, allow_no_key: bool) -> Result<Value>
         return Ok(json!(null));
     }
 
-    Err(anyhow!(
-        "Key '{}' does not exist: {}",
-        key,
-        json.to_string()
-    ))
+    Err(anyhow!("Key '{}' does not exist: {}", key, json))
 }

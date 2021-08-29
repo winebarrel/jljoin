@@ -243,6 +243,7 @@ fn test_join_different_key() {
         str::from_utf8(&buf).unwrap()
     );
 }
+
 #[test]
 fn test_join_without_key() {
     let mut f1 = tempfile::tempfile().unwrap();
@@ -308,5 +309,36 @@ fn test_join_allow_no_key() {
             [{"id":2},{"id":22}]
         "#},
         str::from_utf8(&buf).unwrap()
+    );
+}
+
+#[test]
+fn test_join_no_obj() {
+    let mut f1 = tempfile::tempfile().unwrap();
+    write!(f1, "{}", concat!(r#"[{"id":1}]"#, "\n", r#"[{"id":2}]"#)).unwrap();
+    f1.seek(io::SeekFrom::Start(0)).unwrap();
+
+    let mut f2 = tempfile::tempfile().unwrap();
+    write!(f2, "{}", concat!(r#"[{"id":11}]"#, "\n", r#"[{"id":22}]"#)).unwrap();
+    f2.seek(io::SeekFrom::Start(0)).unwrap();
+
+    let mut buf = Vec::new();
+    let fout = Box::new(&mut buf);
+
+    let r = join(
+        f1,
+        "id",
+        f2,
+        "id",
+        fout,
+        Opts {
+            allow_no_key: false,
+            merge: None,
+        },
+    );
+
+    assert_eq!(
+        r.err().unwrap().to_string(),
+        r#"JSON in row is not Object type: [{"id":1}]"#
     );
 }
