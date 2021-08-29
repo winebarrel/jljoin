@@ -6,6 +6,12 @@ Read two [NDJSON](http://ndjson.org/) files and combine lines with common member
 
 [![Build Status](https://github.com/winebarrel/jljoin/workflows/CI/badge.svg)](https://github.com/winebarrel/jljoin/actions)
 
+## Installation
+
+```
+brew install winebarrel/jl/jljoin
+```
+
 ## Usage
 
 ```
