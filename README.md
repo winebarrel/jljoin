@@ -63,3 +63,8 @@ Options:
 {"file":"ndjson1","id":6,"sub_id":61,"val":"both/multi"}
 {"file":"ndjson1","id":6,"sub_id":61,"val":"both/multi"}
 ```
+
+## Related Links
+
+* https://github.com/winebarrel/jlsort
+* https://github.com/winebarrel/jluniq
