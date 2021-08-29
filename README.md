@@ -40,8 +40,6 @@ Options:
 {"id": 6, "sub_id": 61, "file":"ndjson2", "val":"both/multi"}
 
 % jljoin -k id a.ndjson b.ndjson
-    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
-     Running `target/debug/jljoin -k id a.ndjson b.ndjson`
 [{"file":"ndjson1","id":1,"sub_id":11,"val":"both"},{"file":"ndjson2","id":1,"sub_id":11,"val":"both"}]
 [{"file":"ndjson1","id":2,"sub_id":21,"val":"both/multi 1"},{"file":"ndjson2","id":2,"sub_id":21,"val":"both/multi 1"}]
 [{"file":"ndjson1","id":2,"sub_id":22,"val":"both/multi 1"},{"file":"ndjson2","id":2,"sub_id":21,"val":"both/multi 1"}]
