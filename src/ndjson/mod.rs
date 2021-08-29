@@ -69,7 +69,7 @@ where
             let json2 = curt2.as_ref().unwrap();
             let val2 = json_get_or_err(json2, key2, opts.allow_no_key)?;
 
-            if !prev2.is_none() {
+            if prev2.is_some() {
                 let prev_val2 = &prev2.as_ref().unwrap()[key2];
 
                 if &val2 != prev_val2 {
