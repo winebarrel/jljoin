@@ -29,7 +29,7 @@ where
     let mut reader2 = io::BufReader::new(file2);
     let mut writer = io::BufWriter::new(fout);
 
-    let mut prev1: Option<Value> = None;
+    let mut prev1 = None;
     let mut block_start: u64 = 0;
     let mut block_end: u64 = 0;
 
@@ -43,10 +43,10 @@ where
         let json1 = curt1.as_ref().unwrap();
         let val1 = json_get_or_err(json1, key1, opts.allow_no_key)?;
 
-        if prev1.is_some() {
-            let prev_val1 = &prev1.as_ref().unwrap()[key1];
+        if let Some(ref prev_json1) = prev1 {
+            let prev_val1 = json_get_or_err(prev_json1, key1, opts.allow_no_key)?;
 
-            if &val1 != prev_val1 {
+            if val1 != prev_val1 {
                 // Go to the next block in NDJSON2
                 reader2.seek(io::SeekFrom::Start(block_end))?;
                 block_start = block_end
@@ -56,7 +56,7 @@ where
             }
         }
 
-        let mut prev2: Option<Value> = None;
+        let mut prev2 = None;
 
         loop {
             block_end = reader2.stream_position()?;
@@ -69,10 +69,10 @@ where
             let json2 = curt2.as_ref().unwrap();
             let val2 = json_get_or_err(json2, key2, opts.allow_no_key)?;
 
-            if prev2.is_some() {
-                let prev_val2 = &prev2.as_ref().unwrap()[key2];
+            if let Some(ref prev_json2) = prev2 {
+                let prev_val2 = json_get_or_err(prev_json2, key2, opts.allow_no_key)?;
 
-                if &val2 != prev_val2 {
+                if val2 != prev_val2 {
                     break;
                 }
             }
