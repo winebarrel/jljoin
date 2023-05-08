@@ -2,7 +2,7 @@
 
 Read two [NDJSON](http://ndjson.org/) files and combine lines with common member values.
 
-**Important: FILE1 and FILE2 must be sorted by the value of the join member. (e.g. [jlsort](https://github.com/winebarrel/jlsort))**
+**NOTE: FILE1 and FILE2 must be sorted by the value of the join member. (e.g. [jlsort](https://github.com/winebarrel/jlsort))**
 
 [![Build Status](https://github.com/winebarrel/jljoin/workflows/CI/badge.svg)](https://github.com/winebarrel/jljoin/actions)
 
